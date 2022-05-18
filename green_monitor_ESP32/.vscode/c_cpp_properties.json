@@ -10,6 +10,8 @@
             "includePath": [
                 "c:/Users/user/OneDrive/Develop/ESP32/green_monitor/green_monitor_ESP32/include",
                 "c:/Users/user/OneDrive/Develop/ESP32/green_monitor/green_monitor_ESP32/src",
+                "c:/Users/user/OneDrive/Develop/ESP32/green_monitor/green_monitor_ESP32/.pio/libdeps/esp32doit-devkit-v1/DallasTemperature",
+                "c:/Users/user/OneDrive/Develop/ESP32/green_monitor/green_monitor_ESP32/.pio/libdeps/esp32doit-devkit-v1/OneWire",
                 "C:/Users/user/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/config",
                 "C:/Users/user/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_trace",
                 "C:/Users/user/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_update",
@@ -108,6 +110,8 @@
                 "path": [
                     "c:/Users/user/OneDrive/Develop/ESP32/green_monitor/green_monitor_ESP32/include",
                     "c:/Users/user/OneDrive/Develop/ESP32/green_monitor/green_monitor_ESP32/src",
+                    "c:/Users/user/OneDrive/Develop/ESP32/green_monitor/green_monitor_ESP32/.pio/libdeps/esp32doit-devkit-v1/DallasTemperature",
+                    "c:/Users/user/OneDrive/Develop/ESP32/green_monitor/green_monitor_ESP32/.pio/libdeps/esp32doit-devkit-v1/OneWire",
                     "C:/Users/user/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/config",
                     "C:/Users/user/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_trace",
                     "C:/Users/user/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_update",
