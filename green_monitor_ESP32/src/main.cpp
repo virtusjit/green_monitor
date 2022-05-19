@@ -21,7 +21,8 @@ AsyncMqttClient mqttClient;
 TimerHandle_t mqttReconnectTimer;
 TimerHandle_t wifiReconnectTimer;
 
-String temperatureString = "";     // переменная для хранения
+String temperatureString = "";
+String illuminationString = "";     // переменная для хранения
                                    // данных о температуре
 unsigned long previousMillis = 0;  // здесь хранится информация о том, 
                                    // когда в последний раз 
@@ -122,13 +123,27 @@ void loop() {
 
     temperatureString = String(read_tempC(sensors,sensor1)); 
 
+    if (temperatureString!="-127.00" and temperatureString!="85.00")
+    {
     Serial.println(temperatureString);
 
-    uint16_t packetIdPub2 = mqttClient.publish("/green_monitor/temp/temp1", 2, true, temperatureString.c_str());
-    Serial.print("Publishing on topic /green_monitor/temp/temp1 at QoS 2, packetId: ");  
+    uint16_t packetIdPub2 = mqttClient.publish("/green_monitor/sensors/temp/temp1", 2, true, temperatureString.c_str());
+    Serial.print("Publishing on topic /green_monitor/sensors/temp/temp1 at QoS 2, packetId: ");  
              //  "Публикация в топик «/green_monitor/temp/temp1»
              //   при QoS 2, ID пакета: "
     Serial.println(packetIdPub2);
+
+    }
+
+    illuminationString = String(4095-analogRead(36));
+    Serial.println(illuminationString);
+
+    uint16_t packetIdPub3 = mqttClient.publish("/green_monitor/sensors/illumination/illumination1", 2, true, illuminationString.c_str());
+    Serial.print("Publishing on topic /green_monitor/sensors/illumination/illumination1 at QoS 2, packetId: ");  
+             //  "Публикация в топик «/green_monitor/temp/temp1»
+             //   при QoS 2, ID пакета: "
+    Serial.println(packetIdPub3);
+    
   }
 }
 

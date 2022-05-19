@@ -23,6 +23,6 @@ byte i;
 
 float read_tempC(DallasTemperature dt_sensor,DeviceAddress da)
 {
-  dt_sensor.requestTemperatures();
+  dt_sensor.requestTemperaturesByAddress(da);
   return dt_sensor.getTempC(da);
 }
