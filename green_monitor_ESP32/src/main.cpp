@@ -27,7 +27,7 @@ String illuminationString = "";     // переменная для хранен�
 unsigned long previousMillis = 0;  // здесь хранится информация о том, 
                                    // когда в последний раз 
                                    // была опубликована температура
-const long interval = 5000;        // интервал между публикациями 
+const long interval = 60000;        // интервал между публикациями 
                                    // данных от датчика
 
 // Setup a oneWire instance to communicate with a OneWire device
@@ -35,6 +35,7 @@ OneWire oneWire(ONE_WIRE_BUS);
 // Pass our oneWire reference to Dallas Temperature sensor 
 DallasTemperature sensors(&oneWire);
 DeviceAddress sensor1 = { 0x28, 0xAB, 0xFF, 0x80, 0xA2, 0x21, 0x01, 0x48 };
+DeviceAddress sensor2 = { 0x28, 0x6, 0xF9, 0xCA, 0xA2, 0x21, 0x01, 0x39 }; //28 6 F9 CA A2 21 1 39
 
 void connectToWifi() {
 Serial.println("Connecting to Wi-Fi...");
@@ -112,7 +113,8 @@ void setup() {
 }
 
 void loop() {
-  /* trace_ds18b20_addr(oneWire);*/
+   //trace_ds18b20_addr(oneWire);
+   //delay(10000);
   //Serial.println(read_tempC(sensors,sensor1));
   unsigned long currentMillis = millis();
   if (currentMillis - previousMillis >= interval) {
@@ -127,7 +129,21 @@ void loop() {
     {
     Serial.println(temperatureString);
 
-    uint16_t packetIdPub2 = mqttClient.publish("/green_monitor/sensors/temp/temp1", 2, true, temperatureString.c_str());
+    uint16_t packetIdPub1 = mqttClient.publish("/green_monitor/sensors/temp/temp1", 2, true, temperatureString.c_str());
+    Serial.print("Publishing on topic /green_monitor/sensors/temp/temp1 at QoS 2, packetId: ");  
+             //  "Публикация в топик «/green_monitor/temp/temp1»
+             //   при QoS 2, ID пакета: "
+    Serial.println(packetIdPub1);
+
+    }
+
+    temperatureString = String(read_tempC(sensors,sensor2)); 
+
+    if (temperatureString!="-127.00" and temperatureString!="85.00")
+    {
+    Serial.println(temperatureString);
+
+    uint16_t packetIdPub2 = mqttClient.publish("/green_monitor/sensors/temp/temp2", 2, true, temperatureString.c_str());
     Serial.print("Publishing on topic /green_monitor/sensors/temp/temp1 at QoS 2, packetId: ");  
              //  "Публикация в топик «/green_monitor/temp/temp1»
              //   при QoS 2, ID пакета: "
